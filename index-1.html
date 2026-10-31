@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Handmade soap, bath bombs and soy candles, made in small batches.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23B3225E'/%3E%3Ccircle cx='11' cy='12' r='3' fill='white' opacity='.7'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Saltwick Bath &amp; Candle</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one shell (header, routed main, footer) with hash-routed pages. Big three-beat headline on home, shelf grid, cart and checkout as two-column forms. */
+:root {
+  --bg: #EAF1EE;
+  --surface: #F6FAF8;
+  --fg: #12312C;
+  --muted: #4C6761;
+  --accent: #B3225E;
+  --accent-ink: #FFFFFF;
+  --sea: #9ED3C6;
+  --lilac: #C9B8EA;
+  --line: #C5D6D0;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1D1B; --surface: #152826; --fg: #E3F0EB; --muted: #9FB8B1;
+    --accent: #F28DBA; --accent-ink: #2A0A19; --sea: #2F6B60; --lilac: #6B5A9A; --line: #2A4540;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1D1B; --surface: #152826; --fg: #E3F0EB; --muted: #9FB8B1;
+  --accent: #F28DBA; --accent-ink: #2A0A19; --sea: #2F6B60; --lilac: #6B5A9A; --line: #2A4540;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.04; }
+p { margin: 0; }
+a { color: inherit; }
+main:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.label { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+
+/* header */
+header { display: flex; align-items: center; justify-content: space-between; gap: 14px 20px; padding-block: 20px; flex-wrap: wrap; }
+.logo { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -.02em; text-decoration: none; }
+.logo span { color: var(--accent); }
+nav { display: flex; gap: 8px 20px; font-weight: 500; font-size: 15px; flex-wrap: wrap; }
+nav a { text-decoration: none; color: var(--muted); padding-block: 4px; border-bottom: 2px solid transparent; }
+nav a:hover { color: var(--fg); }
+nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); }
+.hacts { display: flex; gap: 8px; align-items: center; }
+.hbtn { text-decoration: none; font-weight: 600; font-size: 14.5px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--fg); display: inline-flex; align-items: center; gap: 8px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hbtn b { background: var(--accent); color: var(--accent-ink); border-radius: 999px; min-width: 22px; height: 22px; display: inline-grid; place-items: center; font-size: 12.5px; padding-inline: 6px; font-family: var(--font-mono); }
+@media (max-width: 760px) { nav { order: 3; width: 100%; } }
+
+/* buttons and forms */
+.btn { display: inline-block; font: 600 16px var(--font-body); padding: 13px 22px; border-radius: 999px; border: 2px solid var(--fg); background: transparent; color: var(--fg); text-decoration: none; cursor: pointer; text-align: center; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.small { padding: 8px 16px; font-size: 14px; }
+.btn:hover { transform: translateY(-1px); }
+.btn[disabled] { opacity: .45; cursor: default; transform: none; }
+.mini { font: 600 13px var(--font-body); padding: 6px 12px; border-radius: 999px; border: 1.5px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); text-decoration: underline; cursor: pointer; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.field { display: grid; gap: 5px; min-width: 0; }
+.field.span2 { grid-column: 1 / -1; }
+.field label { font-size: 14px; font-weight: 500; }
+.field input, .field textarea, .sel, .search { font: 400 16px var(--font-body); color: var(--fg); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 13px; width: 100%; min-width: 0; }
+.field textarea { min-height: 84px; resize: vertical; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; grid-column: 1 / -1; }
+.check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); }
+@media (max-width: 560px) { .form { grid-template-columns: minmax(0, 1fr); } }
+
+/* pages */
+.page { padding-block: 28px 0; display: grid; gap: 28px; }
+.page-title { font-size: clamp(36px, 7vw, 64px); font-weight: 800; letter-spacing: -.03em; }
+.page-sub { color: var(--muted); max-width: 52ch; margin-top: 10px; font-size: 18px; }
+.crumbs { font-size: 14px; }
+.crumbs a { color: var(--muted); }
+.sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.sec-head h2 { font-size: clamp(30px, 5.5vw, 48px); font-weight: 800; letter-spacing: -.03em; }
+.two { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 800px) { .two { grid-template-columns: minmax(0, 1fr); } }
+
+/* hero */
+.hero { padding-block: 24px 36px; display: grid; gap: 32px; position: relative; }
+.hero h1 { font-size: clamp(46px, 10.5vw, 120px); font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+.hero p.lede { font-size: 20px; max-width: 34ch; color: var(--muted); }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.trio { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+.trio svg { width: 31%; height: auto; max-width: 150px; overflow: visible; }
+.bubbles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; }
+.bubbles i { position: absolute; border-radius: 50%; border: 2px solid var(--sea); opacity: .7; animation: drift 9s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: translateY(-18px); } }
+@media (max-width: 760px) { .hero-row { grid-template-columns: minmax(0, 1fr); } }
+
+.bench { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 2px solid var(--fg); }
+.bench div { padding: 20px 20px 22px; display: grid; gap: 6px; align-content: start; }
+.bench div + div { border-left: 1px solid var(--line); }
+.bench b { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.bench span { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .bench { grid-template-columns: minmax(0, 1fr); } .bench div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tile { border-radius: 18px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.tile h3 { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+.tile p { color: var(--muted); max-width: 36ch; }
+.tile .btn { justify-self: start; margin-top: 6px; }
+.tile.a { background: color-mix(in srgb, var(--sea) 45%, var(--surface)); }
+.tile.b { background: color-mix(in srgb, var(--lilac) 45%, var(--surface)); }
+@media (max-width: 700px) { .tiles { grid-template-columns: minmax(0, 1fr); } }
+
+/* shop */
+.controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.controls .search { flex: 1 1 220px; max-width: 360px; }
+.controls .sel { width: auto; flex: 0 0 auto; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters button { font: 500 15px var(--font-body); padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; min-width: 0; }
+.thumb { height: 92px; border-radius: 10px; display: grid; place-items: center; text-decoration: none; }
+.thumb svg { height: 70px; width: auto; }
+.thumb.big { height: auto; min-height: 300px; border-radius: 16px; }
+.thumb.big svg { height: 200px; }
+.card h3 { font-size: 22px; font-weight: 700; letter-spacing: -.015em; line-height: 1.1; }
+.card h3 a { text-decoration: none; }
+.card h3 a:hover { text-decoration: underline; }
+.card .notes { color: var(--muted); font-size: 15px; line-height: 1.45; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.acts { display: flex; gap: 8px; align-items: center; }
+.price { font-family: var(--font-mono); font-weight: 500; font-size: 15px; font-variant-numeric: tabular-nums; }
+.price small { color: var(--muted); font-size: 12.5px; margin-left: 6px; }
+.add { font: 600 14px var(--font-body); padding: 8px 16px; border-radius: 999px; border: 2px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; }
+.add:hover { background: var(--accent); color: var(--accent-ink); }
+.heart { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); display: inline-grid; place-items: center; cursor: pointer; padding: 0; }
+.heart svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+.heart[aria-pressed="true"] { border-color: var(--accent); }
+.heart[aria-pressed="true"] svg { fill: var(--accent); stroke: var(--accent); }
+.t-soap { background: color-mix(in srgb, var(--sea) 45%, var(--surface)); }
+.t-bomb { background: color-mix(in srgb, var(--lilac) 45%, var(--surface)); }
+.t-candle { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+.t-gift { background: color-mix(in srgb, var(--sea) 30%, var(--lilac) 30%); }
+.pill { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; background: var(--accent); color: var(--accent-ink); border-radius: 999px; padding: 3px 10px; display: inline-block; }
+.incl ul { margin: 6px 0 0; padding-left: 18px; font-size: 15px; }
+.empty { color: var(--muted); }
+
+/* product page */
+.pdp { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+@media (max-width: 760px) { .pdp { grid-template-columns: minmax(0, 1fr); } }
+.pdp h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -.03em; }
+.pdp-info { display: grid; gap: 18px; min-width: 0; }
+.buyrow { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.stepper { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.stepper button { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; font-size: 17px; line-height: 1; }
+.acc details { border-top: 1px solid var(--line); padding-block: 12px; }
+.acc details:last-child { border-bottom: 1px solid var(--line); }
+.acc summary { font-weight: 600; cursor: pointer; }
+.acc details p { margin-top: 8px; color: var(--muted); font-size: 16px; max-width: 60ch; }
+
+/* cart and checkout */
+.lines { display: grid; gap: 0; }
+.line { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding-block: 16px; border-top: 1px solid var(--line); }
+.line:last-child { border-bottom: 1px solid var(--line); }
+.line .thumb { height: 64px; }
+.line .thumb svg { height: 44px; }
+.line h3 { font-size: 19px; font-weight: 700; }
+.line .meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+.line .tot { font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.sum { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: grid; gap: 12px; min-width: 0; }
+.sum h2 { font-size: 26px; font-weight: 700; }
+.row { display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-mono); font-size: 15px; font-variant-numeric: tabular-nums; }
+.row.total { border-top: 1.5px solid var(--line); padding-top: 12px; font-weight: 500; font-size: 17px; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.promo { display: flex; gap: 8px; }
+.promo input { flex: 1; min-width: 0; font: 400 16px var(--font-body); color: var(--fg); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 12px; text-transform: uppercase; }
+.msg { font-size: 14px; min-height: 1.3em; }
+.msg.err { color: var(--accent); }
+.note { font-size: 14px; color: var(--muted); }
+.ordertext { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; font-family: var(--font-mono); font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+.steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start; }
+.steps li::before { content: counter(s); font-family: var(--font-mono); width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--fg); display: grid; place-items: center; }
+.copyrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.copyrow code { font-family: var(--font-mono); font-size: 15px; overflow-wrap: anywhere; }
+
+/* finder */
+.quiz { display: flex; gap: 10px; flex-wrap: wrap; }
+.quiz button { font: 600 16px var(--font-body); padding: 14px 22px; border-radius: 14px; border: 1.5px solid var(--fg); background: var(--surface); color: var(--fg); cursor: pointer; }
+.quiz button:hover { background: var(--fg); color: var(--bg); }
+
+/* orders */
+.orders { display: grid; gap: 10px; }
+.orders details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.orders summary { cursor: pointer; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500; }
+.orders ul { margin: 10px 0 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
+
+.story { max-width: 62ch; display: grid; gap: 14px; color: var(--muted); }
+.story p:first-child { color: var(--fg); font-size: 21px; }
+
+footer { margin-top: 64px; padding-top: 28px; border-top: 2px solid var(--fg); display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; color: var(--muted); font-size: 14.5px; }
+footer nav { font-size: 14.5px; }
+
+.toasts { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; justify-content: center; pointer-events: none; z-index: 20; }
+.toast { pointer-events: auto; background: var(--fg); color: var(--bg); border-radius: 12px; padding: 11px 18px; font-size: 15px; max-width: 520px; box-shadow: 0 6px 24px rgba(0, 0, 0, .22); }
+.toast a { color: inherit; font-weight: 600; margin-left: 6px; }
+
+@media (prefers-reduced-motion: reduce) { .bubbles i { animation: none; } .btn:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="logo" href="#home">Salt<span>wick</span></a>
+    <nav aria-label="Main" id="nav">
+      <a href="#shop" data-r="shop">Shop</a>
+      <a href="#gifts" data-r="gifts">Gift sets</a>
+      <a href="#finder" data-r="finder">Scent finder</a>
+      <a href="#about" data-r="about">About</a>
+      <a href="#help" data-r="help">Help</a>
+      <a href="#contact" data-r="contact">Contact</a>
+    </nav>
+    <div class="hacts">
+      <a class="hbtn" id="acctLink" href="#account" data-r="account">Account</a>
+      <a class="hbtn" id="cartBtn" href="#cart" data-r="cart">Cart <b id="cartCount">0</b></a>
+    </div>
+  </header>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer>
+    <span>Saltwick Bath &amp; Candle. Made by hand in small batches.</span>
+    <nav aria-label="Footer">
+      <a href="#shop">Shop</a>
+      <a href="#help">Shipping and returns</a>
+      <a href="#contact">Contact</a>
+      <a href="#account">Account</a>
+    </nav>
+  </footer>
+</div>
+
+<div class="toasts" aria-live="polite"><div class="toast" id="toast" hidden></div></div>
+
+<script>
+(function () {
+  "use strict";
+  var EMAIL = "hello@saltwick.example";
+  var FREE_SHIP = 50, FLAT_SHIP = 5.95, PROMO_CODE = "WELCOME10", PROMO_PCT = 10;
+  var catLabel = { soap: "Soap", bomb: "Bath bomb", candle: "Candle", gift: "Gift set" };
+
+  var products = [
+    { id: "s1", cat: "soap", name: "Oat & Honey", notes: "Colloidal oat, raw honey, soft vanilla. Gentle on dry skin.", size: "4.5 oz bar", price: 8, tags: ["cozy", "calm"] },
+    { id: "s2", cat: "soap", name: "Eucalyptus Mint", notes: "Cool, clean and sharp. A good morning bar.", size: "4.5 oz bar", price: 8, tags: ["fresh"] },
+    { id: "s3", cat: "soap", name: "Rose Clay", notes: "Pink kaolin clay with rose and a little geranium.", size: "4.5 oz bar", price: 9, tags: ["sweet", "calm"] },
+    { id: "b1", cat: "bomb", name: "Citrus Fizz", notes: "Orange and grapefruit, with a pinch of dried peel on top.", size: "5 oz", price: 6, tags: ["fresh", "sweet"] },
+    { id: "b2", cat: "bomb", name: "Lavender Fields", notes: "Lavender buds and a soft violet swirl.", size: "5 oz", price: 6, tags: ["calm"] },
+    { id: "b3", cat: "bomb", name: "Cotton Candy Pop", notes: "Sweet, bright and very pink. Fizzes hard.", size: "5 oz", price: 6, tags: ["sweet"] },
+    { id: "c1", cat: "candle", name: "Cedar & Smoke", notes: "Cedarwood, campfire and a touch of black pepper.", size: "8 oz jar", price: 22, tags: ["cozy"] },
+    { id: "c2", cat: "candle", name: "Vanilla Bean", notes: "Warm vanilla with a little brown sugar.", size: "8 oz jar", price: 22, tags: ["sweet", "cozy"] },
+    { id: "c3", cat: "candle", name: "Amber Fig", notes: "Ripe fig, amber resin and dry grass.", size: "8 oz jar", price: 22, tags: ["cozy"] },
+    { id: "g1", cat: "gift", name: "Bath Night Box", notes: "A soap, a bath bomb and a candle for one slow evening.", price: 32, includes: ["s1", "b2", "c2"], tags: ["calm", "cozy"] },
+    { id: "g2", cat: "gift", name: "Fizz Set", notes: "Three bath bombs, three very different baths.", price: 15, includes: ["b1", "b2", "b3"], tags: ["fresh", "sweet", "calm"] },
+    { id: "g3", cat: "gift", name: "Soap Trio", notes: "All three bars, wrapped together.", price: 22, includes: ["s1", "s2", "s3"], tags: ["fresh", "calm"] },
+    { id: "g4", cat: "gift", name: "Candle Duo", notes: "Two 8 oz candles for a warm room.", price: 40, includes: ["c1", "c3"], tags: ["cozy"] }
+  ];
+  function byId(id) { for (var i = 0; i < products.length; i++) { if (products[i].id === id) return products[i]; } return null; }
+  function sizeOf(p) { return p.includes ? p.includes.length + " items" : p.size; }
+  function saving(p) { if (!p.includes) return 0; var s = 0; p.includes.forEach(function (i) { s += byId(i).price; }); return s - p.price; }
+
+  var care = {
+    soap: "Keep the bar on a draining dish between uses so it lasts longer. Store unused bars somewhere dry.",
+    bomb: "Drop one into a running or filled tub. Keep it dry until you use it, since the fizz starts the moment it meets water. Rinse the tub after your bath.",
+    candle: "Trim the wick to 1/4 inch before each burn. On the first burn, let the wax melt to the edge of the jar. Never leave a candle burning unattended, and stop when 1/2 inch of wax is left.",
+    gift: "Every item in the box is packed ready to give. Care notes for each one are on its own page."
+  };
+  var ingredientsNote = "A full ingredient list is printed on every label. If you have allergies or sensitive skin, email us before you order and we will send the list ahead.";
+  var shipNote = "Orders ship in 2 to 4 business days. Shipping is " + "$" + FLAT_SHIP.toFixed(2) + ", free on orders of $" + FREE_SHIP + " or more.";
+
+  var thumbs = {
+    soap: '<svg viewBox="0 0 120 80" aria-hidden="true"><rect x="14" y="14" width="92" height="52" rx="14" fill="var(--sea)" stroke="var(--fg)" stroke-width="3"/><rect x="28" y="26" width="30" height="7" rx="3.5" fill="var(--bg)" opacity=".7"/></svg>',
+    bomb: '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="40" fill="var(--lilac)" stroke="var(--fg)" stroke-width="3"/><circle cx="38" cy="40" r="4" fill="var(--bg)"/><circle cx="62" cy="62" r="5" fill="var(--bg)"/></svg>',
+    candle: '<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M50 4c8 10 11 17 5 24-3 4-9 4-11-1-2-6 3-11 6-23z" fill="var(--accent)" stroke="var(--fg)" stroke-width="3" stroke-linejoin="round"/><rect x="18" y="34" width="64" height="68" rx="10" fill="var(--surface)" stroke="var(--fg)" stroke-width="3"/></svg>',
+    gift: '<svg viewBox="0 0 110 100" aria-hidden="true"><rect x="12" y="38" width="86" height="56" rx="8" fill="var(--surface)" stroke="var(--fg)" stroke-width="3"/><rect x="8" y="24" width="94" height="20" rx="6" fill="var(--sea)" stroke="var(--fg)" stroke-width="3"/><path d="M55 24v70" stroke="var(--accent)" stroke-width="8"/><path d="M55 24c-6-16-24-16-22-6 2 8 16 6 22 6zM55 24c6-16 24-16 22-6-2 8-16 6-22 6z" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linejoin="round"/></svg>'
+  };
+  var heartSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+  /* helpers */
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function money(n) { return "$" + (Number(n) || 0).toFixed(2); }
+  function firstName(n) { return String(n || "").split(" ")[0]; }
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem("sw:" + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem("sw:" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable: keep going in memory */ } }
+  };
+
+  /* state */
+  var cart = {};
+  (function () {
+    var c = store.get("cart", {});
+    if (c && typeof c === "object") Object.keys(c).forEach(function (id) { var q = parseInt(c[id], 10); if (byId(id) && q > 0) cart[id] = Math.min(q, 99); });
+  })();
+  var wish = store.get("wish", []);
+  wish = Array.isArray(wish) ? wish.filter(function (id) { return !!byId(id); }) : [];
+  var profile = store.get("profile", null);
+  if (!profile || typeof profile !== "object") profile = null;
+  var orders = store.get("orders", []);
+  if (!Array.isArray(orders)) orders = [];
+  var promoOn = store.get("promo", false) === true;
+  var lastNo = store.get("lastNo", "");
+
+  var shopF = "all", shopQ = "", shopS = "featured";
+  var quiz = { mood: null, kind: null };
+  var askRemove = false;
+
+  var view = document.getElementById("view");
+  var toastEl = document.getElementById("toast");
+  var toastT = null;
+
+  function toast(msg, link) {
+    toastEl.innerHTML = esc(msg) + (link ? ' <a href="' + link.href + '">' + esc(link.text) + "</a>" : "");
+    toastEl.hidden = false;
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.hidden = true; }, 3800);
+  }
+  function copyFrom(text, el, okMsg) {
+    function fail() {
+      if (el) { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+      toast("Copy was blocked. The text is selected, copy it by hand.");
+    }
+    try { navigator.clipboard.writeText(text).then(function () { toast(okMsg); }, fail); } catch (e) { fail(); }
+  }
+
+  /* cart */
+  function cartCount() { var n = 0; Object.keys(cart).forEach(function (k) { n += cart[k]; }); return n; }
+  function totals() {
+    var sub = 0;
+    Object.keys(cart).forEach(function (id) { var p = byId(id); if (p) sub += p.price * cart[id]; });
+    var disc = promoOn ? Math.round(sub * PROMO_PCT) / 100 : 0;
+    var after = sub - disc;
+    var ship = (sub === 0 || after >= FREE_SHIP) ? 0 : FLAT_SHIP;
+    return { sub: sub, disc: disc, after: after, ship: ship, total: after + ship };
+  }
+  function persistCart() { store.set("cart", cart); updateHeader(); }
+  function addToCart(id, q) { cart[id] = Math.min((cart[id] || 0) + q, 99); persistCart(); }
+  function setQty(id, q) { if (q <= 0) delete cart[id]; else cart[id] = Math.min(q, 99); persistCart(); }
+  function toggleWish(id) {
+    var i = wish.indexOf(id);
+    if (i > -1) wish.splice(i, 1); else wish.push(id);
+    store.set("wish", wish);
+    var on = wish.indexOf(id) > -1;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-act="wish"][data-id="' + id + '"]'), function (b) {
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.setAttribute("aria-label", (on ? "Remove " : "Save ") + byId(id).name + (on ? " from saved items" : " to saved items"));
+    });
+    if (currentRoute() === "account") refresh();
+  }
+
+  function updateHeader() {
+    var n = cartCount();
+    document.getElementById("cartCount").textContent = n;
+    document.getElementById("cartBtn").setAttribute("aria-label", "Cart, " + n + (n === 1 ? " item" : " items"));
+    document.getElementById("acctLink").textContent = (profile && profile.name) ? firstName(profile.name) : "Account";
+  }
+
+  /* components */
+  function card(p) {
+    var on = wish.indexOf(p.id) > -1;
+    return '<article class="card">' +
+      '<a class="thumb t-' + p.cat + '" href="#p-' + p.id + '" aria-label="View ' + esc(p.name) + '">' + thumbs[p.cat] + "</a>" +
+      '<div><span class="label">' + catLabel[p.cat] + '</span><h3><a href="#p-' + p.id + '">' + esc(p.name) + "</a></h3></div>" +
+      '<p class="notes">' + esc(p.notes) + "</p>" +
+      '<div class="foot"><span class="price">' + money(p.price) + "<small>" + esc(sizeOf(p)) + "</small></span>" +
+      '<span class="acts"><button type="button" class="heart" data-act="wish" data-id="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(p.name) + (on ? " from saved items" : " to saved items") + '">' + heartSvg + "</button>" +
+      '<button type="button" class="add" data-act="add" data-id="' + p.id + '" aria-label="Add ' + esc(p.name) + ' to cart">Add</button></span></div></article>';
+  }
+  function benchStrip() {
+    return '<div class="bench" aria-label="Batch notes">' +
+      '<div><span class="label">Soap</span><b>Cured 4 to 6 weeks</b><span>Cold process bars, cut by hand and rested before they ship.</span></div>' +
+      '<div><span class="label">Bath bombs</span><b>5 oz, made dry</b><span>Pressed in low humidity so they stay firm until the tub.</span></div>' +
+      '<div><span class="label">Candles</span><b>40 to 50 hour burn</b><span>8 oz soy wax in a jar, cotton wick, trimmed to 1/4 inch.</span></div></div>';
+  }
+  function stepper(id, q) {
+    return '<span class="stepper"><button type="button" data-act="dec" data-id="' + id + '" aria-label="Remove one">-</button><span aria-live="polite">' + q + '</span><button type="button" data-act="inc" data-id="' + id + '" aria-label="Add one">+</button></span>';
+  }
+  function field(id, label, val, o) {
+    o = o || {};
+    return '<div class="field' + (o.span2 ? " span2" : "") + '"><label for="' + id + '">' + label + (o.req ? "" : " (optional)") + "</label>" +
+      '<input id="' + id + '" type="' + (o.type || "text") + '" value="' + esc(val) + '"' + (o.req ? " required" : "") + (o.auto ? ' autocomplete="' + o.auto + '"' : "") + "></div>";
+  }
+  function addressFields(prefix, v) {
+    v = v || {};
+    return field(prefix + "-addr1", "Address", v.addr1, { req: true, auto: "address-line1", span2: true }) +
+      field(prefix + "-addr2", "Apartment, suite, etc.", v.addr2, { auto: "address-line2", span2: true }) +
+      field(prefix + "-city", "City", v.city, { req: true, auto: "address-level2" }) +
+      field(prefix + "-region", "State or region", v.region, { req: true, auto: "address-level1" }) +
+      field(prefix + "-zip", "Postal code", v.zip, { req: true, auto: "postal-code" }) +
+      field(prefix + "-country", "Country", v.country || "United States", { req: true, auto: "country-name" });
+  }
+  function pageHead(title, sub) {
+    return "<div><h1 class='page-title'>" + title + "</h1>" + (sub ? "<p class='page-sub'>" + sub + "</p>" : "") + "</div>";
+  }
+
+  /* pages */
+  function renderHome() {
+    var feat = ["s1", "b1", "c1"].map(byId).map(card).join("");
+    view.innerHTML =
+      '<div class="hero"><div class="bubbles" aria-hidden="true">' +
+      '<i style="width:44px;height:44px;left:52%;top:6%"></i><i style="width:22px;height:22px;left:64%;top:26%;animation-delay:-3s"></i><i style="width:70px;height:70px;left:86%;top:12%;animation-delay:-5s"></i><i style="width:16px;height:16px;left:6%;top:72%;animation-delay:-2s"></i><i style="width:34px;height:34px;left:92%;top:64%;animation-delay:-7s"></i></div>' +
+      "<h1>Wash up.<br><em>Fizz</em> out.<br>Light one.</h1>" +
+      '<div class="hero-row"><div><p class="lede">Handmade soap, bath bombs and soy candles, poured and cut in small batches.</p>' +
+      '<div class="hero-cta"><a class="btn primary" href="#shop">Shop the batch</a><a class="btn" href="#finder">Find your scent</a></div></div>' +
+      '<div class="trio" aria-hidden="true">' +
+      '<svg viewBox="0 0 120 150"><g transform="rotate(-8 60 90)"><rect x="12" y="60" width="96" height="64" rx="16" fill="var(--sea)" stroke="var(--fg)" stroke-width="3"/><rect x="26" y="72" width="34" height="8" rx="4" fill="var(--bg)" opacity=".7"/><circle cx="84" cy="98" r="5" fill="var(--bg)" opacity=".6"/><circle cx="40" cy="106" r="3" fill="var(--bg)" opacity=".6"/></g><circle cx="94" cy="30" r="10" fill="none" stroke="var(--fg)" stroke-width="2.5"/><circle cx="74" cy="14" r="6" fill="none" stroke="var(--fg)" stroke-width="2.5"/></svg>' +
+      '<svg viewBox="0 0 120 150"><circle cx="60" cy="88" r="50" fill="var(--lilac)" stroke="var(--fg)" stroke-width="3"/><path d="M14 88a46 46 0 0 1 92 0" fill="var(--accent)" opacity=".55"/><circle cx="44" cy="70" r="4" fill="var(--bg)"/><circle cx="76" cy="104" r="5" fill="var(--bg)"/><circle cx="62" cy="124" r="3" fill="var(--bg)"/><circle cx="84" cy="66" r="3" fill="var(--bg)"/><circle cx="100" cy="22" r="7" fill="none" stroke="var(--fg)" stroke-width="2.5"/></svg>' +
+      '<svg viewBox="0 0 120 150"><path d="M60 8c10 14 14 22 6 32-4 5-12 5-14-2-3-8 4-14 8-30z" fill="var(--accent)" stroke="var(--fg)" stroke-width="3" stroke-linejoin="round"/><path d="M60 44v14" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"/><rect x="20" y="58" width="80" height="80" rx="12" fill="var(--surface)" stroke="var(--fg)" stroke-width="3"/><rect x="20" y="58" width="80" height="22" rx="12" fill="var(--accent)" opacity=".3"/><rect x="34" y="96" width="52" height="16" rx="3" fill="none" stroke="var(--fg)" stroke-width="2.5"/></svg>' +
+      "</div></div></div>" +
+      benchStrip() +
+      '<div class="page"><div class="sec-head"><div><span class="label">New to Saltwick</span><h2>Start here</h2></div><a class="btn small" href="#shop">See everything</a></div>' +
+      '<div class="grid">' + feat + "</div>" +
+      '<div class="tiles"><div class="tile a"><span class="label">Gift sets</span><h3>Ready to give.</h3><p>Soap trios, fizz sets and candle duos, boxed for less than buying each one.</p><a class="btn" href="#gifts">See gift sets</a></div>' +
+      '<div class="tile b"><span class="label">Scent finder</span><h3>Not sure which?</h3><p>Answer two questions and get three picks that fit your evening.</p><a class="btn" href="#finder">Find your scent</a></div></div></div>';
+  }
+
+  function drawShopGrid() {
+    var q = shopQ.trim().toLowerCase();
+    var list = products.filter(function (p) {
+      if (shopF !== "all" && p.cat !== shopF) return false;
+      if (q && (p.name + " " + p.notes + " " + catLabel[p.cat]).toLowerCase().indexOf(q) === -1) return false;
+      return true;
+    });
+    if (shopS === "low") list.sort(function (a, b) { return a.price - b.price; });
+    else if (shopS === "high") list.sort(function (a, b) { return b.price - a.price; });
+    else if (shopS === "az") list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    document.getElementById("grid").innerHTML = list.map(card).join("");
+    var none = document.getElementById("shopNone");
+    none.hidden = list.length > 0;
+    document.getElementById("shopCount").textContent = list.length + (list.length === 1 ? " product" : " products");
+  }
+  function renderShop() {
+    var chips = [["all", "All"], ["soap", "Soap"], ["bomb", "Bath bombs"], ["candle", "Candles"], ["gift", "Gift sets"]].map(function (c) {
+      return '<button type="button" data-act="filter" data-v="' + c[0] + '" aria-pressed="' + (shopF === c[0]) + '">' + c[1] + "</button>";
+    }).join("");
+    view.innerHTML = '<div class="page">' + pageHead("The shelf", "Everything in the current batch.") +
+      '<div class="controls"><input class="search" id="q" type="search" placeholder="Search scents and products" aria-label="Search products" value="' + esc(shopQ) + '">' +
+      '<select class="sel" id="sort" aria-label="Sort products"><option value="featured"' + (shopS === "featured" ? " selected" : "") + '>Featured</option><option value="low"' + (shopS === "low" ? " selected" : "") + '>Price, low to high</option><option value="high"' + (shopS === "high" ? " selected" : "") + '>Price, high to low</option><option value="az"' + (shopS === "az" ? " selected" : "") + ">Name, A to Z</option></select></div>" +
+      '<div class="filters" role="group" aria-label="Filter by type">' + chips + "</div>" +
+      '<span class="label" id="shopCount" aria-live="polite"></span>' +
+      '<div class="grid" id="grid"></div><p class="empty" id="shopNone" hidden>Nothing matches that search. Try a different word or clear the filter.</p></div>';
+    drawShopGrid();
+  }
+
+  function renderGifts() {
+    var gifts = products.filter(function (p) { return p.cat === "gift"; });
+    var html = gifts.map(function (p) {
+      var on = wish.indexOf(p.id) > -1, sv = saving(p);
+      return '<article class="card"><a class="thumb t-gift" href="#p-' + p.id + '" aria-label="View ' + esc(p.name) + '">' + thumbs.gift + "</a>" +
+        '<div><span class="pill">Save ' + money(sv) + '</span><h3 style="margin-top:8px"><a href="#p-' + p.id + '">' + esc(p.name) + "</a></h3></div>" +
+        '<div class="incl"><p class="notes">' + esc(p.notes) + '</p><ul>' + p.includes.map(function (i) { return "<li>" + esc(byId(i).name) + " <span class='muted'>(" + catLabel[byId(i).cat].toLowerCase() + ")</span></li>"; }).join("") + "</ul></div>" +
+        '<div class="foot"><span class="price">' + money(p.price) + "</span>" +
+        '<span class="acts"><button type="button" class="heart" data-act="wish" data-id="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(p.name) + (on ? " from saved items" : " to saved items") + '">' + heartSvg + "</button>" +
+        '<button type="button" class="add" data-act="add" data-id="' + p.id + '" aria-label="Add ' + esc(p.name) + ' to cart">Add</button></span></div></article>';
+    }).join("");
+    view.innerHTML = '<div class="page">' + pageHead("Gift sets", "Boxed sets cost less than the same items bought one by one.") + '<div class="grid">' + html + "</div></div>";
+  }
+
+  function renderProduct(p) {
+    var on = wish.indexOf(p.id) > -1;
+    var rel = products.filter(function (x) { return x.cat === p.cat && x.id !== p.id; }).slice(0, 3);
+    var inBox = p.includes ? '<div class="incl"><span class="label">In the box</span><ul>' + p.includes.map(function (i) { var q = byId(i); return '<li><a href="#p-' + q.id + '">' + esc(q.name) + "</a> <span class='muted'>(" + catLabel[q.cat].toLowerCase() + ")</span></li>"; }).join("") + "</ul></div>" : "";
+    view.innerHTML = '<div class="page"><div class="crumbs"><a href="#shop">Shop</a> / ' + esc(catLabel[p.cat]) + "</div>" +
+      '<div class="pdp"><div class="thumb big t-' + p.cat + '">' + thumbs[p.cat] + "</div>" +
+      '<div class="pdp-info"><div><span class="label">' + catLabel[p.cat] + "</span><h1>" + esc(p.name) + "</h1></div>" +
+      '<p class="page-sub" style="margin:0">' + esc(p.notes) + "</p>" + inBox +
+      '<p class="price" style="font-size:20px">' + money(p.price) + "<small>" + esc(sizeOf(p)) + "</small>" + (p.includes ? ' <span class="pill">Save ' + money(saving(p)) + "</span>" : "") + "</p>" +
+      '<div class="buyrow"><span class="stepper"><button type="button" data-act="pq-dec" aria-label="Fewer">-</button><span id="pq" aria-live="polite">1</span><button type="button" data-act="pq-inc" aria-label="More">+</button></span>' +
+      '<button type="button" class="btn primary" data-act="add-pdp" data-id="' + p.id + '">Add to cart</button>' +
+      '<button type="button" class="heart" data-act="wish" data-id="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(p.name) + (on ? " from saved items" : " to saved items") + '">' + heartSvg + "</button></div>" +
+      '<div class="acc"><details open><summary>Care and use</summary><p>' + esc(care[p.cat]) + "</p></details>" +
+      "<details><summary>Ingredients and allergies</summary><p>" + esc(ingredientsNote) + "</p></details>" +
+      "<details><summary>Shipping</summary><p>" + esc(shipNote) + "</p></details></div></div></div>" +
+      (rel.length ? '<div class="sec-head"><h2>More ' + (p.cat === "gift" ? "gift sets" : esc(catLabel[p.cat]).toLowerCase() + (p.cat === "soap" ? "" : "s")) + '</h2></div><div class="grid">' + rel.map(card).join("") + "</div>" : "") + "</div>";
+  }
+
+  function renderFinder() {
+    var moods = [["calm", "Calm and quiet"], ["fresh", "Bright and fresh"], ["cozy", "Warm and cozy"], ["sweet", "Sweet and playful"]];
+    var kinds = [["soap", "Soap"], ["bomb", "Bath bombs"], ["candle", "Candles"], ["gift", "A gift set"], ["any", "Surprise me"]];
+    var body;
+    if (!quiz.mood) {
+      body = '<span class="label">Question 1 of 2</span><h2 style="font-size:32px">What kind of evening is it?</h2><div class="quiz">' +
+        moods.map(function (m) { return '<button type="button" data-act="quiz" data-k="mood" data-v="' + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>";
+    } else if (!quiz.kind) {
+      body = '<span class="label">Question 2 of 2</span><h2 style="font-size:32px">What are you after?</h2><div class="quiz">' +
+        kinds.map(function (m) { return '<button type="button" data-act="quiz" data-k="kind" data-v="' + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>" +
+        '<p><button type="button" class="linkbtn" data-act="quiz-reset">Start over</button></p>';
+    } else {
+      var pool = products.filter(function (p) { return quiz.kind === "any" ? p.cat !== "gift" : p.cat === quiz.kind; });
+      var scored = pool.map(function (p, i) { return { p: p, s: p.tags.indexOf(quiz.mood) > -1 ? 1 : 0, i: i }; });
+      scored.sort(function (a, b) { return b.s - a.s || a.i - b.i; });
+      var top = scored.slice(0, 3);
+      var exact = top[0] && top[0].s > 0;
+      var moodName = moods.filter(function (m) { return m[0] === quiz.mood; })[0][1].toLowerCase();
+      body = '<span class="label">Your picks</span><h2 style="font-size:32px">' + (exact ? "For a " + esc(moodName) + " evening." : "Closest picks for a " + esc(moodName) + " evening.") + '</h2><div class="grid">' +
+        top.map(function (t) { return card(t.p); }).join("") + '</div><p><button type="button" class="linkbtn" data-act="quiz-reset">Start over</button></p>';
+    }
+    view.innerHTML = '<div class="page">' + pageHead("Scent finder", "Two questions, three picks.") + '<div style="display:grid;gap:18px">' + body + "</div></div>";
+  }
+
+  function renderAbout() {
+    view.innerHTML = '<div class="page">' + pageHead("About Saltwick") +
+      '<div class="story"><p>Saltwick makes soap, bath bombs and soy candles in small batches, by hand.</p>' +
+      "<p>Batches stay small so scents stay fresh and soap cures fully before it leaves. When a scent sells out, it goes back in the queue, and some come back only once a season.</p>" +
+      "<p>Every product has its full ingredient list on the label, and we are happy to answer questions about a scent or a skin concern before you order.</p></div>" +
+      benchStrip() + '<div class="hero-cta"><a class="btn primary" href="#shop">Shop the batch</a><a class="btn" href="#contact">Get in touch</a></div></div>';
+  }
+
+  function renderHelp() {
+    var qa = [
+      ["How does ordering work?", "Add items to your cart and check out. You get an order request to send to us, and we reply with a payment link and shipping details. Nothing is charged until you pay that link."],
+      ["How long does shipping take?", shipNote],
+      ["Can I return something?", "If something arrives damaged or is not what you ordered, email us within 14 days and we will make it right. Used bath and body products cannot be returned."],
+      ["I have allergies or sensitive skin.", ingredientsNote],
+      ["How do I look after my candle?", care.candle],
+      ["How should I store soap and bath bombs?", care.soap + " " + care.bomb],
+      ["Do you take custom or bulk orders?", "Yes. Email us with what you have in mind and a date, and we will tell you what is possible."]
+    ];
+    view.innerHTML = '<div class="page">' + pageHead("Help", "Shipping, returns and care.") +
+      '<div class="acc">' + qa.map(function (x, i) { return "<details" + (i === 0 ? " open" : "") + "><summary>" + esc(x[0]) + "</summary><p>" + esc(x[1]) + "</p></details>"; }).join("") + "</div>" +
+      '<p class="muted">Still stuck? <a href="#contact">Contact us</a>.</p></div>';
+  }
+
+  function renderContact() {
+    view.innerHTML = '<div class="page">' + pageHead("Contact", "Questions about a scent, an order or a custom set.") +
+      '<div class="sum" style="max-width:520px"><span class="label">Email us</span>' +
+      '<div class="copyrow"><code id="emailText">' + EMAIL + '</code><button type="button" class="mini" data-act="copy" data-src="emailText" data-ok="Email address copied.">Copy</button></div>' +
+      '<p class="note">We reply within 2 business days. For an existing order, include your order number.</p></div></div>';
+  }
+
+  function lineHtml(id) {
+    var p = byId(id), q = cart[id];
+    return '<div class="line"><a class="thumb t-' + p.cat + '" href="#p-' + p.id + '" aria-label="View ' + esc(p.name) + '">' + thumbs[p.cat] + "</a>" +
+      '<div><h3><a href="#p-' + p.id + '" style="text-decoration:none">' + esc(p.name) + '</a></h3><span class="label">' + catLabel[p.cat] + " / " + esc(sizeOf(p)) + "</span>" +
+      '<div class="meta">' + stepper(id, q) + '<button type="button" class="linkbtn" data-act="rm" data-id="' + id + '" aria-label="Remove ' + esc(p.name) + ' from cart">Remove</button></div></div>' +
+      '<span class="tot">' + money(p.price * q) + "</span></div>";
+  }
+  function summaryRows(t) {
+    return '<div class="row"><span>Subtotal</span><span>' + money(t.sub) + "</span></div>" +
+      (promoOn ? '<div class="row"><span>Discount (' + PROMO_CODE + ')</span><span>-' + money(t.disc) + "</span></div>" : "") +
+      '<div class="row"><span>Shipping</span><span>' + (t.ship ? money(t.ship) : "Free") + "</span></div>" +
+      '<div class="row total"><span>Total</span><span>' + money(t.total) + "</span></div>";
+  }
+  function renderCart() {
+    var ids = Object.keys(cart);
+    if (!ids.length) {
+      view.innerHTML = '<div class="page">' + pageHead("Your cart") + '<p class="empty">Your cart is empty.</p><div class="hero-cta"><a class="btn primary" href="#shop">Shop the batch</a><a class="btn" href="#gifts">See gift sets</a></div></div>';
+      return;
+    }
+    var t = totals();
+    var remaining = FREE_SHIP - t.after;
+    var pct = Math.max(0, Math.min(100, Math.round((t.after / FREE_SHIP) * 100)));
+    view.innerHTML = '<div class="page">' + pageHead("Your cart") +
+      '<div class="two"><div class="lines">' + ids.map(lineHtml).join("") + "</div>" +
+      '<div class="sum"><h2>Summary</h2>' +
+      '<div><p class="note" style="margin-bottom:6px">' + (remaining > 0 ? "Add " + money(remaining) + " more for free shipping." : "You have free shipping.") + '</p><div class="bar" aria-hidden="true"><i style="width:' + pct + '%"></i></div></div>' +
+      summaryRows(t) +
+      (promoOn ? '<p class="note">Code ' + PROMO_CODE + ' applied. <button type="button" class="linkbtn" data-act="promo-off">Remove</button></p>' :
+        '<form id="promoForm" class="promo"><input id="promo" type="text" placeholder="Promo code" aria-label="Promo code" autocomplete="off"><button class="btn small" type="submit">Apply</button></form><p class="msg err" id="promoMsg" role="alert"></p>') +
+      '<a class="btn primary" href="#checkout">Check out</a><p class="note">Tax and shipping to your region are confirmed when we reply.</p></div></div></div>';
+  }
+
+  function renderCheckout() {
+    var ids = Object.keys(cart);
+    if (!ids.length) { renderCart(); return; }
+    var t = totals(), v = profile || {};
+    var list = ids.map(function (id) { var p = byId(id); return '<div class="row"><span>' + cart[id] + " x " + esc(p.name) + "</span><span>" + money(p.price * cart[id]) + "</span></div>"; }).join("");
+    view.innerHTML = '<div class="page">' + pageHead("Check out", "You will get an order request to send to us. Nothing is charged here.") +
+      '<div class="two"><form id="checkoutForm" class="form">' +
+      field("co-name", "Full name", v.name, { req: true, auto: "name", span2: true }) +
+      field("co-email", "Email", v.email, { req: true, type: "email", auto: "email" }) +
+      field("co-phone", "Phone", v.phone, { type: "tel", auto: "tel" }) +
+      addressFields("co", v) +
+      '<div class="field span2"><label for="co-note">Gift message or note (optional)</label><textarea id="co-note"></textarea></div>' +
+      '<label class="check"><input type="checkbox" id="co-save" checked><span>' + (profile ? "Save these details to my account" : "Create an account with these details") + "</span></label>" +
+      '<div class="span2" style="grid-column:1/-1"><button class="btn primary" type="submit">Create order request</button></div></form>' +
+      '<div class="sum"><h2>Your order</h2>' + list + summaryRows(t) + '<a class="linkbtn" href="#cart">Edit cart</a></div></div></div>';
+  }
+
+  function orderText(o) {
+    var c = o.customer || {};
+    var lines = ["Order request " + o.no, "", "Name: " + c.name, "Email: " + c.email];
+    if (c.phone) lines.push("Phone: " + c.phone);
+    lines.push("Ship to: " + [c.addr1, c.addr2, c.city, c.region, c.zip, c.country].filter(Boolean).join(", "), "", "Items:");
+    (o.lines || []).forEach(function (l) { lines.push(l.qty + " x " + l.name + " (" + l.label + ") - " + money(l.price * l.qty)); });
+    lines.push("", "Subtotal: " + money(o.sub));
+    if (o.disc) lines.push("Discount (" + o.promo + "): -" + money(o.disc));
+    lines.push("Shipping: " + (o.ship ? money(o.ship) : "Free"), "Total: " + money(o.total));
+    if (o.note) lines.push("", "Note: " + o.note);
+    return lines.join("\n");
+  }
+  function renderConfirmed() {
+    var o = null;
+    for (var i = 0; i < orders.length; i++) { if (orders[i].no === lastNo) { o = orders[i]; break; } }
+    if (!o) { location.hash = "shop"; return; }
+    view.innerHTML = '<div class="page">' + pageHead("Your order request is ready", "It has not been sent yet. Copy it and email it to us to place the order.") +
+      '<div class="two"><div style="display:grid;gap:14px;min-width:0"><pre class="ordertext" id="orderText">' + esc(orderText(o)) + "</pre>" +
+      '<div class="copyrow"><button type="button" class="btn primary" data-act="copy" data-src="orderText" data-ok="Order request copied.">Copy order request</button></div></div>' +
+      '<div class="sum"><h2>What happens next</h2><ol class="steps"><li><span>Copy your order request.</span></li>' +
+      '<li><span>Email it to <strong id="sendTo">' + EMAIL + '</strong>.</span></li>' +
+      "<li><span>We reply with a payment link and shipping details. Your order is placed once you pay.</span></li></ol>" +
+      '<button type="button" class="mini" data-act="copy" data-src="sendTo" data-ok="Email address copied." style="justify-self:start">Copy email address</button>' +
+      '<p class="note">This request is saved in your account on this device as ' + esc(o.no) + ".</p></div></div></div>";
+  }
+
+  function orderDate(iso) { try { return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }); } catch (e) { return ""; } }
+  function renderAccount() {
+    var v = profile;
+    var top;
+    if (!v) {
+      top = '<div class="sum" style="max-width:560px"><h2>Create your account</h2><p class="note">Save your details for faster checkout, keep a list of saved items and see your order requests. Your details are saved on this device.</p>' +
+        '<form id="signupForm" class="form">' + field("su-name", "Full name", "", { req: true, auto: "name", span2: true }) + field("su-email", "Email", "", { req: true, type: "email", auto: "email", span2: true }) +
+        '<div class="span2" style="grid-column:1/-1"><button class="btn primary" type="submit">Create account</button></div></form></div>';
+    } else {
+      top = '<div class="sum"><h2>Hi, ' + esc(firstName(v.name)) + '</h2><p class="note">Your details are saved on this device and fill in at checkout.</p>' +
+        '<form id="profileForm" class="form">' + field("pf-name", "Full name", v.name, { req: true, auto: "name", span2: true }) + field("pf-email", "Email", v.email, { req: true, type: "email", auto: "email" }) + field("pf-phone", "Phone", v.phone, { type: "tel", auto: "tel" }) +
+        addressFields("pf", v).replace(/ required/g, "").replace(/<label for="(pf-[a-z0-9]+)">([^<]*)<\/label>/g, function (m, id, txt) { return '<label for="' + id + '">' + txt.replace(" (optional)", "") + " (optional)</label>"; }) +
+        '<div class="span2" style="grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit">Save details</button><span class="msg" id="pfMsg" role="status"></span></div></form></div>';
+    }
+    var saved = wish.length ? '<div class="grid">' + wish.map(byId).map(card).join("") + "</div>" : '<p class="empty">Nothing saved yet. Tap the heart on any product to keep it here.</p>';
+    var ords = orders.length ? '<div class="orders">' + orders.map(function (o) {
+      return "<details><summary><span>" + esc(o.no) + ' <span class="muted">' + esc(orderDate(o.date)) + "</span></span><span class='price'>" + money(o.total) + "</span></summary><ul>" +
+        (o.lines || []).map(function (l) { return "<li>" + esc(l.qty) + " x " + esc(l.name) + "</li>"; }).join("") + "</ul></details>";
+    }).join("") + '</div><p class="note">Order requests are only a record of what you sent us. An order is placed once you pay the link we reply with.</p>' : '<p class="empty">No order requests yet.</p>';
+    var rm = "";
+    if (v || orders.length || wish.length) {
+      rm = askRemove ? '<div class="sum" style="max-width:560px"><p>This clears your saved details, saved items and order requests from this device.</p><div class="hero-cta" style="margin:0"><button type="button" class="btn primary small" data-act="rm-yes">Yes, remove everything</button><button type="button" class="btn small" data-act="rm-no">Keep it</button></div></div>' :
+        '<p><button type="button" class="linkbtn" data-act="rm-ask">Remove my account from this device</button></p>';
+    }
+    view.innerHTML = '<div class="page">' + pageHead("Account") + top +
+      '<div class="sec-head"><h2>Saved items</h2></div>' + saved +
+      '<div class="sec-head"><h2>Order requests</h2></div>' + ords + rm + "</div>";
+  }
+
+  /* router */
+  var routes = { home: renderHome, shop: renderShop, gifts: renderGifts, finder: renderFinder, about: renderAbout, help: renderHelp, contact: renderContact, cart: renderCart, checkout: renderCheckout, confirmed: renderConfirmed, account: renderAccount };
+  function currentRoute() { var h = (location.hash || "#home").slice(1); return /^p-/.test(h) ? "shop" : (routes[h] ? h : "home"); }
+  function route(keepScroll) {
+    var h = (location.hash || "#home").slice(1), m = /^p-([a-z0-9]+)$/.exec(h), p = m ? byId(m[1]) : null;
+    if (p) renderProduct(p); else (routes[h] || renderHome)();
+    var cur = currentRoute();
+    Array.prototype.forEach.call(document.querySelectorAll("[data-r]"), function (a) {
+      if (a.getAttribute("data-r") === cur) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    if (!keepScroll) { window.scrollTo(0, 0); try { view.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+  }
+  function refresh() { var y = window.scrollY; route(true); window.scrollTo(0, y); }
+  window.addEventListener("hashchange", function () { askRemove = false; route(false); });
+
+  /* events */
+  view.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-act]");
+    if (!b) return;
+    var act = b.getAttribute("data-act"), id = b.getAttribute("data-id");
+    if (act === "add") { addToCart(id, 1); toast("Added " + byId(id).name + ".", { href: "#cart", text: "View cart" }); }
+    else if (act === "add-pdp") { var n = parseInt(document.getElementById("pq").textContent, 10) || 1; addToCart(id, n); toast("Added " + n + " x " + byId(id).name + ".", { href: "#cart", text: "View cart" }); }
+    else if (act === "pq-inc" || act === "pq-dec") { var el = document.getElementById("pq"), c = parseInt(el.textContent, 10) || 1; el.textContent = Math.max(1, Math.min(99, c + (act === "pq-inc" ? 1 : -1))); }
+    else if (act === "wish") { toggleWish(id); }
+    else if (act === "inc") { setQty(id, (cart[id] || 0) + 1); refresh(); }
+    else if (act === "dec") { setQty(id, (cart[id] || 0) - 1); refresh(); }
+    else if (act === "rm") { setQty(id, 0); refresh(); }
+    else if (act === "filter") {
+      shopF = b.getAttribute("data-v");
+      Array.prototype.forEach.call(document.querySelectorAll('[data-act="filter"]'), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      drawShopGrid();
+    }
+    else if (act === "quiz") { quiz[b.getAttribute("data-k")] = b.getAttribute("data-v"); refresh(); }
+    else if (act === "quiz-reset") { quiz = { mood: null, kind: null }; refresh(); }
+    else if (act === "copy") { var src = document.getElementById(b.getAttribute("data-src")); copyFrom(src.textContent, src, b.getAttribute("data-ok")); }
+    else if (act === "promo-off") { promoOn = false; store.set("promo", false); refresh(); }
+    else if (act === "rm-ask") { askRemove = true; refresh(); }
+    else if (act === "rm-no") { askRemove = false; refresh(); }
+    else if (act === "rm-yes") {
+      profile = null; wish = []; orders = []; lastNo = ""; askRemove = false;
+      store.set("profile", null); store.set("wish", []); store.set("orders", []); store.set("lastNo", "");
+      updateHeader(); refresh(); toast("Removed from this device.");
+    }
+  });
+  view.addEventListener("input", function (e) { if (e.target.id === "q") { shopQ = e.target.value; drawShopGrid(); } });
+  view.addEventListener("change", function (e) { if (e.target.id === "sort") { shopS = e.target.value; drawShopGrid(); } });
+
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; }
+  function readAddr(prefix) {
+    return { addr1: val(prefix + "-addr1"), addr2: val(prefix + "-addr2"), city: val(prefix + "-city"), region: val(prefix + "-region"), zip: val(prefix + "-zip"), country: val(prefix + "-country") };
+  }
+  function newOrderNo() { var d = new Date(), p = function (n) { return (n < 10 ? "0" : "") + n; }; return "SW-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + "-" + Math.floor(1000 + Math.random() * 9000); }
+
+  view.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var id = e.target.id;
+    if (id === "promoForm") {
+      var code = val("promo").toUpperCase(), msg = document.getElementById("promoMsg");
+      if (code === PROMO_CODE) { promoOn = true; store.set("promo", true); refresh(); toast("Promo code applied."); }
+      else msg.textContent = code ? "That code is not valid." : "Enter a code first.";
+    } else if (id === "signupForm") {
+      profile = { name: val("su-name"), email: val("su-email"), phone: "", addr1: "", addr2: "", city: "", region: "", zip: "", country: "United States" };
+      store.set("profile", profile); updateHeader(); refresh(); toast("Account created on this device.");
+    } else if (id === "profileForm") {
+      var a = readAddr("pf");
+      profile = { name: val("pf-name"), email: val("pf-email"), phone: val("pf-phone"), addr1: a.addr1, addr2: a.addr2, city: a.city, region: a.region, zip: a.zip, country: a.country };
+      store.set("profile", profile); updateHeader();
+      var m = document.getElementById("pfMsg"); if (m) m.textContent = "Saved.";
+    } else if (id === "checkoutForm") {
+      var ids = Object.keys(cart); if (!ids.length) return;
+      var t = totals(), ad = readAddr("co");
+      var cust = { name: val("co-name"), email: val("co-email"), phone: val("co-phone"), addr1: ad.addr1, addr2: ad.addr2, city: ad.city, region: ad.region, zip: ad.zip, country: ad.country };
+      var o = {
+        no: newOrderNo(), date: new Date().toISOString(), customer: cust, note: val("co-note"),
+        lines: ids.map(function (i) { var p = byId(i); return { name: p.name, label: catLabel[p.cat] + ", " + sizeOf(p), qty: cart[i], price: p.price }; }),
+        sub: t.sub, disc: t.disc, ship: t.ship, total: t.total, promo: promoOn ? PROMO_CODE : ""
+      };
+      orders.unshift(o); orders = orders.slice(0, 20); lastNo = o.no;
+      store.set("orders", orders); store.set("lastNo", lastNo);
+      var save = document.getElementById("co-save");
+      if (save && save.checked) { profile = cust; store.set("profile", profile); }
+      cart = {}; persistCart();
+      location.hash = "confirmed";
+    }
+  });
+
+  updateHeader();
+  route(true);
+})();
+</script>
+</body>
+</html>
