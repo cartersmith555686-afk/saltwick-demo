@@ -1,2 +1,0 @@
-# saltwick-demo
-Saltwick
